@@ -1,0 +1,29 @@
+{
+  "name": "-RealTime-Chat-Application-with-nodejs-Socket.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node src/index.js",
+    "lint": "eslint ."
+  },
+  "repository": "https://github.com/saberfathallah/-RealTime-Chat-Application-with-nodejs-Socket.io.git",
+  "author": "saber <saberfathallah7@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.12.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^6.14.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6",
+    "prettier": "^2.1.2"
+  }
+}
