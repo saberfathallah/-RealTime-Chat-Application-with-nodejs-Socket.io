@@ -2,9 +2,6 @@ import services from '../services/userServices';
 
 export default async ({ req = {}, res = {}, root }) => {
   try {
-    // service["login"]
-    // service["getUsers"]
-    // service["updateUser"]
     const result = await services[root](req, res);
     return res.status(result.status).send(result);
   } catch (err) {
