@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 
 import User from '../../db/models/user';
+import { USER_SECRET_KEY } from '../../constants/user';
 
 const signIn = async (req) => {
   const { body: { email, password } } = req;
@@ -24,7 +25,7 @@ const signIn = async (req) => {
       };
     }
 
-    const accessToken = await jwt.sign({ token: user._id }, "user secret key", { expiresIn: '1h' });
+    const accessToken = await jwt.sign({ token: user._id }, USER_SECRET_KEY, { expiresIn: '1h' });
 
     return {
       status: 200,

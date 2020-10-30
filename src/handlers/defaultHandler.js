@@ -1,4 +1,4 @@
-import services from '../services/userServices';
+import services from '../services';
 
 export default async ({ req = {}, res = {}, root }) => {
   try {
