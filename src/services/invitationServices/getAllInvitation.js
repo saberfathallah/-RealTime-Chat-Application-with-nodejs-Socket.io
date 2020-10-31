@@ -5,8 +5,7 @@ const getAllInvitation = async (req) => {
   const userId = req.userId;
 
   try {
-    const invitations = await Invitation.find({ idInvited: userId, status: PENDING }).populate("idInvited");
-
+    const invitations = await Invitation.find({ idInvited: userId, status: PENDING }).populate("userSendInvitation");
     return {
       status: 200,
       invitations,

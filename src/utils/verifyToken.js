@@ -1,11 +1,11 @@
 import jwt from 'jsonwebtoken';
 import { USER_SECRET_KEY } from '../constants/user';
 
-export function getToken(token) {
+export function getUserToken(token) {
   try {
     const decoded = jwt.verify(token, USER_SECRET_KEY);
   
-    return decoded.token;
+    return decoded.user;
   } catch (error) {
     return null;
   }
@@ -18,7 +18,7 @@ export const verifyToken = async (req, res, next) => {
     const accessToken = req.headers.authorization;
 
     if (accessToken) {
-      const userId = await getToken(accessToken);
+      const { id: userId} = await getUserToken(accessToken);
       if (!userId) {
         return res.status(401).send({
           message: 'Failed to authenticate, please update your token.',

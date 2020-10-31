@@ -17,7 +17,6 @@ const signIn = async (req) => {
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
-
     if (!isValidPassword) {
       return {
         status: 400,
@@ -25,7 +24,7 @@ const signIn = async (req) => {
       };
     }
 
-    const accessToken = await jwt.sign({ token: user._id }, USER_SECRET_KEY, { expiresIn: '1h' });
+    const accessToken = await jwt.sign({ user }, USER_SECRET_KEY, { expiresIn: '1h' });
 
     return {
       status: 200,
