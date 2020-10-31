@@ -8,6 +8,7 @@ import routes from './routes';
 import Invitation from './db/models/invitation';
 import { getUserToken } from './utils/verifyToken';
 import { PENDING } from './constants/invitationsStatus';
+import { sendInvitation } from './socketServices';
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,31 +21,10 @@ routes(app);
 const io = socketio(server);
 
 io.on('connect', async (socket) => {
-  console.log('connectt');
   const idInvited = socket.handshake.query.idInvited;
   socket.join(idInvited);
-  socket.on('sendInvitation', async (invitation) => {
-    const { idInvited, userToken } = invitation;
-    const { id, firstName, lastName, email } = getUserToken(userToken);
-    try {
-      // await Invitation.remove({
-      //   idInvited: id,
-      // });
-      await Invitation.create({
-        idInvited: invitation.idInvited,
-        status: PENDING,
-        userSendInvitation: id,
-      });
-      io.to(idInvited).emit('reciveInvitation', {
-        userSendInvitation: { firstName, lastName, email, id },
-        status: PENDING,
-        idInvited: invitation.idInvited,
-      });
-    } catch (error) {
-      console.log('errorsendInvitation', error);
-    }
+  socket.on('sendInvitation', (invitation) => sendInvitation(invitation, socket));
   });
-});
 
 app.on('error', (err) => {
   console.log(`server error ${err}`);
