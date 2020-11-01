@@ -1,8 +1,10 @@
 import User from '../../db/models/user';
 
-const getAllUsers = async () => {
+const getAllUsers = async (req) => {
+  const userId = req.userId;
+
   try {
-    const users = await User.find();
+    const users = await User.find({ _id: { $ne: userId } });
     return {
       status: 200,
       users,

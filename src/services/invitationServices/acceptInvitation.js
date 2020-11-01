@@ -1,6 +1,6 @@
-
 import Invitation from '../../db/models/invitation';
 import validateUserId from '../../utils/validateUserId';
+import { VALIDATED } from '../../constants/invitationsStatus';
 
 async function acceptInvitation(req) {
   validateUserId(ctx);
@@ -9,9 +9,9 @@ async function acceptInvitation(req) {
 
   try {
     let inv = await Invitation.findOne({ idInvited: userid, id: idInvited });
-    inv.status = 'valid';
+    inv.status = VALIDATED;
     await inv.save();
-    return 
+    return;
     ctx.body = { success: 'success add friend ' };
     ctx.status = 200;
   } catch (err) {

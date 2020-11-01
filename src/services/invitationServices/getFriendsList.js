@@ -1,7 +1,7 @@
 import Invitation from '../../db/models/invitation';
 import { VALIDATED } from '../../constants/invitationsStatus';
 
-const getListOfFriends = async (req) => {
+const getFriendsList = async (req) => {
   const userId = req.userId;
 
   try {
@@ -11,7 +11,7 @@ const getListOfFriends = async (req) => {
         { idInvited: userId, status: VALIDATED },
       ],
     });
-  
+
     return {
       status: 200,
       friends,
@@ -24,4 +24,4 @@ const getListOfFriends = async (req) => {
   }
 };
 
-export default getListOfFriends;
+export default getFriendsList;

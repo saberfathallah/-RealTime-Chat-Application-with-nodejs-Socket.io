@@ -1,3 +1,4 @@
 import sendInvitation from './sendInvitation';
+import annulateInvitation from './annulateInvitation';
 
-export { sendInvitation };
+export { annulateInvitation, sendInvitation };

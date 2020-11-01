@@ -1,16 +1,15 @@
 import Invitation from '../../db/models/invitation';
-import { PENDING } from '../../constants/invitationsStatus';
 
-const getAllInvitation = async (req) => {
+const getListUserInvited = async (req) => {
   const userId = req.userId;
+
   try {
-    const invitations = await Invitation.find({
-      idInvited: userId,
-      status: PENDING,
+    const listUserInvited = await await Invitation.find({
+      userSendInvitation: userId,
     }).populate('userSendInvitation');
     return {
       status: 200,
-      invitations,
+      listUserInvited,
     };
   } catch (err) {
     return {
@@ -20,4 +19,4 @@ const getAllInvitation = async (req) => {
   }
 };
 
-export default getAllInvitation;
+export default getListUserInvited;
