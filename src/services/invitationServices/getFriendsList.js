@@ -7,7 +7,7 @@ const getFriendsList = async (req) => {
   try {
     const friends = await Invitation.find({
       $or: [
-        { id: userId, status: VALIDATED },
+        { userSendInvitation: userId, status: VALIDATED },
         { idInvited: userId, status: VALIDATED },
       ],
     });

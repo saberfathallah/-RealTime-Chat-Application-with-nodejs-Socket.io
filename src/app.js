@@ -5,7 +5,12 @@ import http from 'http';
 import cors from 'cors';
 
 import routes from './routes';
-import { sendInvitation, annulateInvitation } from './socketServices';
+import {
+  sendInvitation,
+  annulateInvitation,
+  acceptInvitation,
+  refuseInvitation,
+} from './socketServices';
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -23,8 +28,14 @@ io.on('connect', async (socket) => {
   socket.on('sendInvitation', (invitation) =>
     sendInvitation(invitation, socket)
   );
+  socket.on('acceptInvitation', (invitation) =>
+    acceptInvitation(invitation, socket)
+  );
   socket.on('annulateInvitation', (invitation) =>
     annulateInvitation(invitation, socket)
+  );
+  socket.on('refuseInvitation', (invitation) =>
+    refuseInvitation(invitation, socket)
   );
 });
 
