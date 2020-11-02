@@ -18,8 +18,9 @@ const acceptInvitation = async (invitation, socket) => {
       user: {
         firstName,
         lastName,
-        id: idSend,
+        id,
       },
+      idSend,
     });
   } catch (error) {
     console.log('errorsendInvitation', error);
