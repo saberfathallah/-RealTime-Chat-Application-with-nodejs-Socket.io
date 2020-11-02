@@ -10,11 +10,21 @@ const getFriendsList = async (req) => {
         { userSendInvitation: userId, status: VALIDATED },
         { idInvited: userId, status: VALIDATED },
       ],
-    });
+    })
+      .populate('userSendInvitation')
+      .populate('idInvited');
+
+    const formatFriends = friends.map((friend) =>
+      friend.idInvited._id.toString() === userId
+        ? Object.assign(friend.userSendInvitation, {
+            id: friend.userSendInvitation._id,
+          })
+        : Object.assign(friend.idInvited, { id: friend.idInvited._id })
+    );
 
     return {
       status: 200,
-      friends,
+      friends: formatFriends,
     };
   } catch (err) {
     return {
