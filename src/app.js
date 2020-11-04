@@ -10,6 +10,7 @@ import {
   annulateInvitation,
   acceptInvitation,
   refuseInvitation,
+  removeFriend,
 } from './socketServices';
 
 const app = express();
@@ -37,6 +38,9 @@ io.on('connect', async (socket) => {
   socket.on('refuseInvitation', (invitation) =>
     refuseInvitation(invitation, socket)
   );
+  socket.on('removeFriend', (removeFriendInput) =>
+  removeFriend(removeFriendInput, socket)
+);
 });
 
 app.on('error', (err) => {
