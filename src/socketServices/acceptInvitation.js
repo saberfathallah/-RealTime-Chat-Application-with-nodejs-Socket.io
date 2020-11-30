@@ -3,7 +3,6 @@ import Invitation from '../db/models/invitation';
 import { VALIDATED } from '../constants/invitationsStatus';
 
 const acceptInvitation = async (invitation, socket) => {
-  console.log('hereeeee');
   const { idSend, userToken } = invitation;
   const { firstName, lastName, id } = getUserToken(userToken);
   try {

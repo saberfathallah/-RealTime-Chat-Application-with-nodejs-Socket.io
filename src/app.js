@@ -11,6 +11,7 @@ import {
   acceptInvitation,
   refuseInvitation,
   removeFriend,
+  sendMessage,
 } from './socketServices';
 
 const app = express();
@@ -39,8 +40,10 @@ io.on('connect', async (socket) => {
     refuseInvitation(invitation, socket)
   );
   socket.on('removeFriend', (removeFriendInput) =>
-  removeFriend(removeFriendInput, socket)
-);
+    removeFriend(removeFriendInput, socket)
+  );
+
+  socket.on('sendMessage', (message) => sendMessage(message, socket));
 });
 
 app.on('error', (err) => {
