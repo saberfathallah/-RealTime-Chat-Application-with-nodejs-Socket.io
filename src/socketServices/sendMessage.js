@@ -21,7 +21,7 @@ const sendMessage = async (message, socket) => {
         conversation: [],
       });
     }
-    const createdAt = new Date();
+
     coversation.conversation.push({
       user: id,
       text,

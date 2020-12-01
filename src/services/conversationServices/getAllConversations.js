@@ -15,7 +15,10 @@ const getAllConversations = async (req) => {
     const formatConversations = conversations.map((conversation) =>
       conversation.firstMember._id.toString() === userId
         ? Object.assign(
-            { user: conversation.secondMember },
+            {
+              user: conversation.secondMember,
+              secondMemberId: conversation.firstMember._id,
+            },
             {
               conversation: conversation.conversation.map((c, i) => {
                 return {
@@ -32,7 +35,10 @@ const getAllConversations = async (req) => {
             }
           )
         : Object.assign(
-            { user: conversation.firstMember },
+            {
+              user: conversation.firstMember,
+              secondMemberId: conversation.secondMember._id,
+            },
             {
               conversation: conversation.conversation.map((c, i) => {
                 return {
