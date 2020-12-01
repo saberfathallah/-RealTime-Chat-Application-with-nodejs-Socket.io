@@ -25,8 +25,8 @@ routes(app);
 const io = socketio(server);
 
 io.on('connect', async (socket) => {
-  const idInvited = socket.handshake.query.idInvited;
-  socket.join(idInvited);
+  const id = socket.handshake.query.id;
+  socket.join(id);
   socket.on('sendInvitation', (invitation) =>
     sendInvitation(invitation, socket)
   );
